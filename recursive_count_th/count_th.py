@@ -5,15 +5,17 @@ Your function must utilize recursion. It cannot contain any loops.
 '''
 
 
-def count_th(word):
-	count = 0
+def count_th(word, count=0):
+	print(word)
 	if len(word) < 2:
 		return count
 	elif word[:2] == 'th':
 		count += 1
-		return count_th(word[2:])
-	else:
-		return count_th(word[1:])
+	return count_th(word[1:], count)
 
 
-print(count_th('afdlkjasdfl;kthsadfkljdsalkthaskldfjdsklthasdklfjdsalkthsakldfjdslkthththth'))
+def begin(word):
+	return count_th(word)
+
+
+print(begin('afdlkjasdfl;kthsadfkljdsalkthaskldfjdsklthasdklfjdsalkthsakldfjdslkthththth'))
