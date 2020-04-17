@@ -99,29 +99,66 @@ class SortingRobot:
 		Sort the robot's list.
 		"""
 		# Fill this out
-		while True:
-			self.swap_item()
-			self.move_right()
-			if self.compare_item() == 1:
+		while True:                             # This will cause the loop to run until a break
+			self.set_light_off()                # Turn light off so we can check against it later
+			while self.can_move_right():        # Do the following while we are able to move right             This loop will repeat
+				self.swap_item()                # Trade None for list[i]                                       As long as we are able to move right
+				self.move_right()               # Move to the right                                            It will consistently grab the None value
+				if self.compare_item() == 1:    # If the held item is greater than the [i]                     Replace it with [i]
+					self.swap_item()            # Swap them                                                    And then compare held item against [i]
+				self.move_left()                # Move back to the left
+				self.swap_item()                # And swap the [i] with None
+				self.move_right()               # Move back right
+			while self.can_move_left():
 				self.swap_item()
 				self.move_left()
-				self.swap_item()
+				if self.compare_item() == -1:
+					self.swap_item()
+					self.set_light_on()
 				self.move_right()
-				self.set_light_on()
-			else:
+				self.swap_item()
 				self.move_left()
-				self.swap_item()
-				self.swap_item()
-			if not self.can_move_right():
-				if self.set_light_on():
-					self.set_light_off()
-					while self.can_move_left():
-						self.move_left()
-						self.set_light_on()
-			else:
+			if self.light_is_on() is False:     # We can only get here if the list is sorted
 				break
 
 
+'''
+Code visualization:
+IN HAND
+CURRENT LIST
+
+BEING LOOP
+N
+4 2 5 1 3
+
+SWAP
+4
+N 2 5 1 3
+
+MOVE RIGHT
+  4
+N 2 5 1 3
+
+SWAP IF 1
+  2
+N 4 5 1 3
+
+MOVE LEFT
+2
+N 4 5 1 3
+
+SWAP FOR NONE
+N
+2 4 5 1 3
+
+MOVE RIGHT
+  N
+2 4 5 1 3
+
+REPEAT TO END
+
+REVERSE FOR LEFT
+'''
 
 '''
 The light can be used to start at the beginning of list
@@ -141,6 +178,17 @@ If the light is on, if we move left, it will start the function over
 So the light needs to be turned off before we go back to the start of the list
 Turn off light, and while we can move left, move left
 Then turn the light back on
+WE NEED TO COMPARE NEGATIVES AS WELL
+---------------------------------------------------------------------------------
+Turn light on to start loop
+Turn light off so it can be turned back on at end of loop
+Swap none for item
+Move right while able to move right
+Compare items
+Swap if 1
+Turn light on to repeat loop
+When reaching end of list
+Go back left and repeat?
 '''
 
 if __name__ == "__main__":
