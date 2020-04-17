@@ -118,6 +118,8 @@ class SortingRobot:
 					while self.can_move_left():
 						self.move_left()
 						self.set_light_on()
+			else:
+				break
 
 
 
