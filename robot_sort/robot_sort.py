@@ -178,6 +178,7 @@ If the light is on, if we move left, it will start the function over
 So the light needs to be turned off before we go back to the start of the list
 Turn off light, and while we can move left, move left
 Then turn the light back on
+---------------------------------------------------------------------------------
 WE NEED TO COMPARE NEGATIVES AS WELL
 ---------------------------------------------------------------------------------
 Turn light on to start loop
